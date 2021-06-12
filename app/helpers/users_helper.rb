@@ -14,7 +14,7 @@ module UsersHelper
       hedVal = h.text
       heading_arr << hedVal
 
-      user.update heading: heading_arr
+      user.update headings: heading_arr
     end
   end
 end
