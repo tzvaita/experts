@@ -3,8 +3,7 @@ require 'open-uri'
 
 module UsersHelper
 
-  def scrape_site
-    the_url = 'https://tenny-zvaita.tech'
+  def scrape_site(user, the_url)
     html = URI.open(the_url)
     doc = Nokogiri::HTML(html)
 
@@ -15,7 +14,7 @@ module UsersHelper
       hedVal = h.text
       heading_arr << hedVal
 
-      print heading_arr
+      user.update heading: heading_arr
     end
   end
 end
