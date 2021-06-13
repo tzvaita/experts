@@ -1,40 +1,39 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Users</h1>
+<h1 class="heading">Experts</h1>
 
-<table>
-  <thead>
+<table class="table table-striped table-dark">
+  <thead class="thead-dark">
     <tr>
-      <th>Name</th>
-      <th>Short URL</th>
-      <th>No. of friends</th>
+      <th scope="col">Name</th>
+      <th scope="col">Short URL</th>
+      <th scope="col">No. of friends</th>
       <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @users.each do |user| %>
-      <tr>
-        <td><%= user.name %></td>
-        <td><%= user.shortened %></td>
+      <tr class="bg-warning">
+        <td><%=link_to user.name, user %></td>
+        <td><a href="<%= user.shortened %>"><%= user.shortened %></a></td>
         <td><%= user.friends.count %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', user, class: "btn btn-warning" %></td>
+
         <td>
           <% if friend_request_sent?(user) %>
             <p>Waiting for approval</p>
             <% elsif friend_request_received?(user) %>
               <div>
-              <%= link_to 'Accept Request', accept_friend_user_friendships_path({:user_id => user.id})%> 
-              <%= link_to 'Cancel Request', decline_friend_user_friendships_path({:user_id => user.id})%> 
+              <%= link_to 'Accept Request', accept_friend_user_friendships_path({:user_id => user.id}), class: "btn btn-success"%> 
+              <%= link_to 'Cancel Request', decline_friend_user_friendships_path({:user_id => user.id}), class: "btn btn-danger"%> 
             </div>
             <% elsif friends_already(user) %>
             <p>friends already</p>
             <% elsif me?(user)%>
             <%= link_to 'go to my profile', current_user%>
             <% else %>
-            <%= link_to 'Add friend', friendships_create_path({:sent_to_id => user.id, :status => false}) %>
+            <%= link_to 'Add friend', friendships_create_path({:sent_to_id => user.id, :status => false}), class: "btn btn-success" %>
           <%end%>
         </td>
       </tr>
@@ -43,5 +42,3 @@
 </table>
 
 <br>
-
-<%= link_to 'New User', new_user_path %>

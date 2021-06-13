@@ -3,7 +3,7 @@
 <% @results.each do |result| %>
   <% if !current_user.friends.include?(result) %>
     <p>
-      <%= link_to result.name, result %> knows <% mutual_friends(result).each do |r|%>
+      <%= link_to result.name, result %> get introduced by your friend(s): <% mutual_friends(result).each do |r|%>
         <% if current_user.friends.include?(r) %>
           <%= link_to r.name, r %>
         <% end %>
