@@ -59,6 +59,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def search
+    if params[:search].blank?
+      redirect_to users_path and return
+    else
+      @parameter = params[:search].downcase
+      @results = User.all.where("array_to_string(headings, '||') ILIKE :name", name: "%#{@parameter}%")
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
