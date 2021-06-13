@@ -6,7 +6,8 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Website</th>
+      <th>Short URL</th>
+      <th>No. of friends</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -15,7 +16,8 @@
     <% @users.each do |user| %>
       <tr>
         <td><%= user.name %></td>
-        <td><%= user.website %></td>
+        <td><%= user.shortened %></td>
+        <td><%= user.friends.count %></td>
         <td><%= link_to 'Show', user %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
         <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
