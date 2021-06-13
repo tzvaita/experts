@@ -26,6 +26,8 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        reset_session
+        log_in @user
         scrape_site(@user, @user.website)
         short_url(@user, @user.website)
         format.html { redirect_to @user, notice: "User was successfully created." }
