@@ -24,4 +24,14 @@ module UsersHelper
     bitlink = client.shorten(long_url: url)
     user.update shortened: bitlink.link
   end
+
+  def mutual_friends(user)
+    mutual = current_user.friends
+    k = []
+    mutual.each do |m|
+      r = m.friends.include?(user)
+      k << User.find(user.id)
+    end
+    return k
+  end
 end
