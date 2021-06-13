@@ -1,5 +1,11 @@
 <h3>Users who write about: <%= @parameter %></h3>
 
 <% @results.each do |result| %>
-  <%= result.name %><br>
+  <% if !current_user.friends.include?(result) %>
+    <p>
+      <%= result.name %> knows <% mutual_friends(result).each do |r|%>
+        <%= r.name%>
+      <% end %>
+    </p>
+  <% end %>
 <% end %>
