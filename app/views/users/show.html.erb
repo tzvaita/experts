@@ -25,17 +25,19 @@
 </p>
 
 <p>
-  <strong>Heading from website:</strong>
+  <strong>Headings from website:</strong>
   <% @user.headings.each do |h| %>
-    <p><%= h %></p>
+    <li><%= h %></li>
   <% end %>
 </p>
 
 <p>
   <strong>Friends:</strong>
   <% @user.friends.each do |f| %>
+  <li>
   <%= f.name %>
   <%= link_to 'View profile', f %>
+  </li>
   <% end %>
 </p>
 
