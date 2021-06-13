@@ -21,6 +21,22 @@
         <td><%= link_to 'Show', user %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
         <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <% if friend_request_sent?(user) %>
+            <p>Waiting for approval</p>
+            <% elsif friend_request_received?(user) %>
+              <div>
+              <%= link_to 'Accept Request', accept_friend_user_friendships_path({:user_id => user.id})%> 
+              <%= link_to 'Cancel Request', decline_friend_user_friendships_path({:user_id => user.id})%> 
+            </div>
+            <% elsif friends_already(user) %>
+            <p>friends already</p>
+            <% elsif me?(user)%>
+            <%= link_to 'go to my profile', current_user%>
+            <% else %>
+            <%= link_to 'Add friend', friendships_create_path({:sent_to_id => user.id, :status => false}) %>
+          <%end%>
+        </td>
       </tr>
     <% end %>
   </tbody>
